@@ -15,7 +15,7 @@ def promedio_desplazamiento_cuadratico(r):
     return np.mean(r**2)
 
 def coef_difusion(r, t):
-    return promedio_desplazamiento_cuadratico(r)/(2*t)
+    return promedio_desplazamiento_cuadratico(r)/(2*2*t)
 
 # Valores del tiempo y desplazamiento del video 30
 t_30 = DF['t30']
@@ -46,10 +46,9 @@ font.set_size(9)
 fig1, ax1 = plt.subplots(figsize=(3.25, 3.25))
 ax1.plot(np.arange(1, 31), valores_coeficientes_dif, c='r', ls="", marker="x", markersize=5)
 ax1.axhline(y=promedio_coeficientes, color='black', linestyle='--', linewidth=1)
-plt.text(25, promedio_coeficientes+0.15, r"$D=$"+str(round(promedio_coeficientes, 3)), fontsize=9,
+plt.text(25, promedio_coeficientes+0.1, r"$D=$"+str(round(promedio_coeficientes, 3)), fontsize=9,
                      ha='center', va='center')
 ax1.set_xlim([0, 31])
-ax1.set_ylim([0, 6])
 ax1.set_xlabel('Número del video', fontproperties=font)
 ax1.set_ylabel(r'Coeficiente de difusión [mm$^2$/s]', fontproperties=font)
 ax1.tick_params(direction="in")
