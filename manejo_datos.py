@@ -20,11 +20,14 @@ def coef_difusion(r, t):
 # Valores del tiempo y desplazamiento del video 30
 t_30 = DF['t30']
 r_30 = DF['r30']*1000
+x_path_30 = DF['x_path_30']*1000
+y_path_30 = DF['y_path_30']*1000
+t_path_30 = DF['t_path_30']
 
 # Arreglo con 0s para guardar los valores de los coefs.
-valores_coeficientes_dif = np.zeros(int(len(DF.columns)/2))
+valores_coeficientes_dif = np.zeros(int((len(DF.columns)-3)/2))
 
-for i in range(1, int(len(DF.columns)/2)+1):
+for i in range(1, int((len(DF.columns)-3)/2)+1):
     # Este bucle toma el tiempo que duró la grabación, para poder calcular
     # el coef. de difusión para cada video
     t_max = np.max(DF['t'+str(i)])
@@ -71,3 +74,15 @@ ax2.yaxis.set_tick_params(rotation=90)
 ax2.tick_params(direction="in", top=True, right=True)
 fig2.tight_layout()    
 fig2.savefig("img/desplazamiento30.pdf")
+
+fig3, ax3 = plt.subplots(figsize=(3.25, 3.25))
+ax3.plot(x_path_30, y_path_30, drawstyle="steps-mid", c="red", linewidth=1)
+ax3.set_xlabel('Posición x [mm]', fontproperties=font)
+ax3.set_ylabel('Posición y [mm]', fontproperties=font)
+ax3.ticklabel_format(axis="y", style="sci", scilimits=(0,0))
+ax3.xaxis.set_tick_params(labelsize=9)
+ax3.yaxis.set_tick_params(labelsize=9)
+ax3.yaxis.set_tick_params(rotation=90)
+ax3.tick_params(direction="in", top=True, right=True)
+fig3.tight_layout()    
+fig3.savefig("img/camino30.pdf")
