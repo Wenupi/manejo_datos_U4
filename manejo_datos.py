@@ -15,7 +15,7 @@ def promedio_desplazamiento_cuadratico(r):
     return np.mean(r**2)
 
 def coef_difusion(r, t):
-    return promedio_desplazamiento_cuadratico(r)/(2*t)
+    return promedio_desplazamiento_cuadratico(r)/(4*t)
 
 # Valores del tiempo y desplazamiento del video 30
 t_30 = DF['t30']
@@ -49,10 +49,10 @@ font.set_size(9)
 fig1, ax1 = plt.subplots(figsize=(3.25, 3.25))
 ax1.plot(np.arange(1, 31), valores_coeficientes_dif, c='r', ls="", marker="x", markersize=5)
 ax1.axhline(y=promedio_coeficientes, color='black', linestyle='--', linewidth=1)
-plt.text(25, promedio_coeficientes+0.15, r"$D=$"+str(round(promedio_coeficientes, 3)), fontsize=9,
+plt.text(25, promedio_coeficientes+0.1, r"$D=$"+str(round(promedio_coeficientes, 3)), fontsize=9,
                      ha='center', va='center')
 ax1.set_xlim([0, 31])
-ax1.set_ylim([0, 6])
+
 ax1.set_xlabel('Número del video', fontproperties=font)
 ax1.set_ylabel(r'Coeficiente de difusión [mm$^2$/s]', fontproperties=font)
 ax1.tick_params(direction="in")
@@ -64,7 +64,7 @@ fig1.tight_layout()
 fig1.savefig("img/diffcoeff.pdf")
 
 fig2, ax2 = plt.subplots(figsize=(3.25, 3.25))
-ax2.plot(t_30, r_30, drawstyle="steps-mid", c="red", linewidth=1)
+ax2.plot(t_30, r_30, c="red", linewidth=1)
 ax2.set_xlabel('Tiempo [s]', fontproperties=font)
 ax2.set_ylabel('Distancia al origen [mm]', fontproperties=font)
 ax2.ticklabel_format(axis="y", style="sci", scilimits=(0,0))
@@ -76,7 +76,7 @@ fig2.tight_layout()
 fig2.savefig("img/desplazamiento30.pdf")
 
 fig3, ax3 = plt.subplots(figsize=(3.25, 3.25))
-ax3.plot(x_path_30, y_path_30, drawstyle="steps-mid", c="red", linewidth=1)
+ax3.plot(x_path_30, y_path_30, c="red", linewidth=1)
 ax3.set_xlabel('Posición x [mm]', fontproperties=font)
 ax3.set_ylabel('Posición y [mm]', fontproperties=font)
 ax3.ticklabel_format(axis="y", style="sci", scilimits=(0,0))
